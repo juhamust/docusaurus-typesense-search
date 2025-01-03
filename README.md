@@ -24,17 +24,24 @@ This repository contains a simple demo about using [Docusaurus](https://docusaur
     # Start the Typesense server and make sure it is running
     npm run start:typesense
     docker ps
-
-    # Start the Docusaurus in development mode
-    # The command will run with sudo because 
-    # it needs to bind to port 80
-    # (the scraper requires to use port 80/443)
-    npm run start:docusaurus
     ```
+
+- Build the Docusaurus website and serve it
+
+    ```bash
+    npm run build:docusaurus
+    npm run serve:docusaurus
+    ```
+
+  **NOTE**: The command will run with sudo because it needs to bind to port 80 (the scraper requires to use port 80/443)
 
 - Scrap the website and index it in Typesense
 
     ```bash
     # Runs the Typesense scraper script
-    npm run build:index
+    npm run build:index | grep -E 'records|hits' 
     ```
+
+- Test the search functionality
+
+    Open the browser and navigate to `http://localhost/` and try to search for something. Shortcut to search: `Ctrl + K`
