@@ -11,7 +11,7 @@ This repository contains a simple demo about using [Docusaurus](https://docusaur
 
     ```bash
     # Clone the repository
-    git clone ...
+    git clone https://github.com/juhamust/docusaurus-typesense-search.git
     cd docusaurus-typesense-search
 
     # Install dependencies
