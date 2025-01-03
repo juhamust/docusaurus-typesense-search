@@ -18,7 +18,7 @@ This repository contains a simple demo about using [Docusaurus](https://docusaur
     npm install
     ```
 
-- Start the Docusaurus and Typesense server
+- Start the Typesense server
 
     ```bash
     # Start the Typesense server and make sure it is running
