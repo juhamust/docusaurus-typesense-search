@@ -45,3 +45,4 @@ This repository contains a simple demo about using [Docusaurus](https://docusaur
 - Test the search functionality
 
     Open the browser and navigate to `http://localhost/` and try to search for something. Shortcut to search: `Ctrl + K`
+    

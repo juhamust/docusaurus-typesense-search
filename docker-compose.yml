@@ -1,0 +1,49 @@
+services:
+  docusaurus:
+    image: docusaurus:latest
+    build:
+      context: ./docusaurus
+      dockerfile: Dockerfile
+    ports:
+      - "80:3000"
+
+  typesense:
+    image: typesense/typesense:28.0
+    #network_mode: host
+    ports:
+      - "8108:8108"
+    environment:
+      - TYPESENSE_HOST=0.0.0.0
+      - TYPESENSE_PORT=8108
+      - TYPESENSE_ENABLE_CORS=true
+      - TYPESENSE_ENABLE_METRICS=true
+      - TYPESENSE_API_KEY=xyz
+    volumes:
+      - ./typesense-server/data:/data
+    entrypoint:
+      [
+        "/opt/typesense-server",
+        "--data-dir",
+        "/data",
+        "--api-key",
+        "$TYPESENSE_API_KEY",
+        "--enable-cors",
+      ]
+
+  typesense-scraper:
+    image: typesense-scraper:latest
+    privileged: true
+    build:
+      context: ./typesense-scraper
+      dockerfile: Dockerfile
+    depends_on:
+      - docusaurus
+      - typesense
+    environment:
+      - TYPESENSE_HOST=host.docker.internal
+      - TYPESENSE_API_KEY=xyz
+      - TYPESENSE_PORT=8108
+      - TYPESENSE_PROTOCOL=http
+    #volumes:
+    #  - ./typesense-scraper:/app/typesense-scraper
+    #command: ["/app/typesense-scraper/scrape.sh"]
